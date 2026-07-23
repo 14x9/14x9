@@ -41,8 +41,46 @@ npm run build
 npm run start      # serves the production build (needs Node)
 ```
 
-Deploys anywhere Node runs (Vercel, Netlify, a VPS, Docker…). Point your custom
-domain at the host and you're live.
+Deploys anywhere Node runs (Vercel, Netlify, a VPS, Docker…). It must be a Node
+host, not a static export — `next.config.mjs` leaves Next's image optimizer on,
+and case-study images rely on it.
+
+## Publishing
+
+The live site is **14x9.com**. Deploys are triggered by pushing to `main`.
+
+```bash
+git add -A
+git commit -m "Add Foo case study"
+git push
+```
+
+The host rebuilds automatically. Content is read off disk at build time
+(`lib/work.ts`), so a rebuild is what makes new writing appear — there is no
+separate publish step.
+
+### The CMS is local-only
+
+Keystatic is configured with `storage: { kind: "local" }`, so it edits files on
+your machine. **Its routes are disabled in production builds** — `/keystatic`
+and `/api/keystatic` return 404 on the live site. Two reasons:
+
+- Local mode writes to the filesystem, which is read-only and wiped on each
+  deploy on a hosted runtime, so saving could never work there anyway.
+- Local mode has **no authentication at all**. Shipped, it would put an open
+  admin UI on the public domain.
+
+So the authoring loop is:
+
+1. `npm run dev`, edit at <http://localhost:3000/keystatic>
+2. Keystatic writes to `content/work/*.mdx` and `public/uploads/<slug>/`
+3. Commit those files and push — the rebuild publishes them
+
+If you ever want to edit from anywhere, switch `storage` to
+[GitHub mode](https://keystatic.com/docs/github-mode): Keystatic then commits
+straight to the repo (which triggers a deploy on its own) and authenticates
+against GitHub repo access. That needs a GitHub App and four env vars, and the
+production gate on those two routes should come off at the same time.
 
 ## Structure
 
