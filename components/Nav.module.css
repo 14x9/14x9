@@ -1,0 +1,162 @@
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  /* Transparent overlay — sits over the homepage hero and page content alike.
+     The frosted blur comes from the .blur layer stack below. Text color is
+     driven by --nav-fg, flipped to white over dark backdrops (see [data-theme]). */
+  background: transparent;
+  --nav-fg: var(--color-fg);
+}
+
+/* Set by the client sampler when the content behind the bar is dark. */
+.nav[data-theme="dark"] {
+  --nav-fg: var(--color-white);
+}
+
+/* Progressive blur stack. Each child blurs the page content behind the fixed
+   nav; layered masks make the blur strongest at the top and clear at the bottom. */
+.blur {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  /* No tint — pure blur, so the background keeps its true color (not faded). */
+}
+
+/* Hidden at the top of the page; fades in once scrolled (see Nav.tsx).
+
+   The opacity sits on each layer rather than on .blur, deliberately. An ancestor
+   with opacity < 1 becomes a "backdrop root", and a backdrop-filter only samples
+   content inside its own backdrop root — so fading the parent would leave these
+   layers sampling an empty backdrop and the frost would drop out partway through
+   the transition. On the layer itself, the backdrop is filtered first and the
+   result is then composited at that opacity, which is what we want. */
+.blur > div {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity var(--duration-base) var(--ease-standard);
+}
+
+.nav[data-scrolled] .blur > div {
+  opacity: 1;
+}
+
+/* Blur radius grows per layer; the mask fades each layer out higher up as the
+   radius increases, so layers drop away one by one toward the bottom edge. */
+.blur > div:nth-child(1) {
+  backdrop-filter: blur(1px);
+  -webkit-backdrop-filter: blur(1px);
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 50%, transparent 90%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 50%, transparent 90%);
+}
+.blur > div:nth-child(2) {
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 40%, transparent 75%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 40%, transparent 75%);
+}
+.blur > div:nth-child(3) {
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 30%, transparent 60%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 30%, transparent 60%);
+}
+.blur > div:nth-child(4) {
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 20%, transparent 45%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 20%, transparent 45%);
+}
+.blur > div:nth-child(5) {
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 10%, transparent 30%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 10%, transparent 30%);
+}
+.blur > div:nth-child(6) {
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, transparent 18%);
+  mask-image: linear-gradient(to bottom, #000 0%, transparent 18%);
+}
+
+/* Nav items sit left, logo right; 96px tall with the page's side margins.
+   Sits above the blur stack so the links and logo stay sharp. */
+.inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-6);
+  height: var(--nav-height);
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  color: var(--nav-fg);
+  transition: color var(--duration-base) var(--ease-standard),
+    opacity var(--duration-fast) var(--ease-standard);
+}
+
+.brand:hover {
+  opacity: 0.55;
+}
+
+/* Wordmark inherits .brand's color via fill="currentColor" */
+.logo {
+  height: var(--logo-height);
+  width: auto;
+  display: block;
+}
+
+.links {
+  display: flex;
+  /* 80% wider than the scale's --space-6 (24px → 43.2px). Kept as a calc off
+     the token so it still tracks if the spacing scale is retuned. */
+  gap: calc(var(--space-6) * 1.8);
+}
+
+.link {
+  position: relative;
+  display: inline-block;
+  font-size: var(--text-base);
+  font-weight: var(--weight-medium);
+  color: var(--nav-fg);
+  transition: color var(--duration-base) var(--ease-standard);
+}
+
+/* 2px rule under the label. It wipes in from the left on hover and retracts to
+   the right on hover-out; the active page keeps it drawn. Uses currentColor so
+   it follows the nav's ink/white flip. */
+.link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -4px;
+  height: 2px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform var(--duration-base) var(--ease-standard);
+}
+
+.link:hover::after,
+.link.active::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* While any link is hovered, the active link (if it isn't the one hovered)
+   retracts — so only one underline is ever drawn and focus reads as moving
+   from one label to the other. Scoped with :has() so hovering the gap between
+   links doesn't retract anything. */
+.links:has(.link:hover) .link.active:not(:hover)::after {
+  transform: scaleX(0);
+  transform-origin: right;
+}

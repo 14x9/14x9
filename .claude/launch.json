@@ -1,0 +1,7 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    { "name": "mercury", "runtimeExecutable": "node", "runtimeArgs": ["/Users/naimsheriff/Documents/claude-projects/14x9/.claude/server.mjs"], "port": 8134 },
+    { "name": "14x9-dev", "runtimeExecutable": "npm", "runtimeArgs": ["run", "dev"], "port": 3000, "autoPort": true }
+  ]
+}

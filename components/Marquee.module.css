@@ -1,0 +1,40 @@
+.marquee {
+  overflow: hidden;
+  width: 100%;
+  white-space: nowrap;
+}
+
+.track {
+  display: inline-flex;
+  gap: var(--space-6);
+  /* Note the type size below feeds into this: the track travels its own width,
+     so bigger text means more px covered in the same time. The 10% size bump
+     eats into the slowdown, leaving ~27% slower on screen rather than 50%. */
+  animation: scroll 36s linear infinite;
+  will-change: transform;
+}
+
+/* Oversized uppercase sans, set in black so it reads as an embossed shape
+   against the dark band rather than as foreground text. */
+.item {
+  font-family: var(--font-body);
+  font-weight: var(--weight-light);
+  font-size: clamp(3.85rem, 15.4vw, 222px);
+  line-height: var(--leading-none);
+  letter-spacing: var(--tracking-normal);
+  text-transform: uppercase;
+  color: var(--color-black);
+}
+
+.dot {
+  color: inherit;
+}
+
+@keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}

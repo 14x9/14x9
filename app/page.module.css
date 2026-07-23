@@ -1,0 +1,27 @@
+.page {
+  padding-top: 0;
+  /* Breathing room between the last case study's caption and the footer block,
+     which is full-bleed and would otherwise butt straight up against it. */
+  padding-bottom: clamp(6rem, 4rem + 8vw, 14rem);
+}
+
+/* Pull the title up so it straddles the bottom edge of the hero — the top of
+   the letters over the orange, the bottom over white (as in the design). The
+   overlap is a % of the container width, so it scales with the title and keeps
+   the same proportion at every breakpoint. */
+.head {
+  position: relative;
+  z-index: 1;
+  margin-top: -13%;
+  margin-bottom: var(--space-16);
+}
+
+/* "The Work" — scales to fill the full content width (minus gutters). */
+.headline {
+  color: var(--color-fg);
+  margin-bottom: var(--space-6);
+}
+
+.subline {
+  color: var(--color-black);
+}

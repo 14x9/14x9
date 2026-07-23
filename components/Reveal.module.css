@@ -1,0 +1,24 @@
+/* Scroll reveal: content starts nudged down and transparent, then springs up
+   into place. Opacity eases smoothly; the position has a hair of overshoot so
+   the reveal feels alive rather than mechanical. */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.65s cubic-bezier(0.34, 1.28, 0.4, 1);
+}
+
+.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Respect reduced-motion: show everything, no movement. */
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

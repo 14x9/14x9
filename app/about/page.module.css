@@ -1,0 +1,137 @@
+.page {
+  position: relative;
+}
+
+/* The "sun" disc behind the hero lives in <Sun />, which paints a fixed canvas
+   at z-index -1. See components/Sun.tsx. */
+
+/* ---- Hero ---- */
+.hero {
+  padding-top: var(--space-8);
+  padding-bottom: var(--space-24);
+}
+
+/* Oversized serif word. Tracks the reference's ~20.5vw (≈295px at 1440). */
+.headline {
+  font-family: var(--font-display);
+  font-weight: var(--weight-display);
+  font-size: clamp(4rem, 20.5vw, 320px);
+  line-height: var(--leading-none);
+  letter-spacing: var(--tracking-normal);
+  color: var(--color-ink);
+}
+
+/* Intro copy sits in the right half of the grid. */
+.intro {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-top: var(--space-12);
+}
+
+.introCol {
+  grid-column: 2;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+.est {
+  font-family: var(--font-body);
+  font-size: var(--text-body-xs);
+  font-weight: var(--weight-medium);
+  line-height: var(--leading-none);
+  color: var(--color-ink);
+}
+
+/* ---- Dark logo bands ---- */
+.band {
+  background: var(--color-ink);
+  color: var(--color-paper);
+  padding-top: 5rem; /* 80px, matching the reference band */
+  padding-bottom: 2.5rem; /* 40px */
+  overflow: hidden;
+
+  /* Dark surface: re-map the foreground roles for everything inside. <Text>
+     variants set `color: var(--color-fg)` themselves, which is the same
+     specificity as any class we could put on them here and wins on source
+     order — so plain `color` above never reaches them. Flipping the role
+     variables is what actually lands, and it covers any Text dropped into the
+     band later rather than just the one paragraph. */
+  --color-fg: var(--color-paper);
+  --color-fg-muted: var(--color-concrete);
+  --color-fg-subtle: var(--color-concrete);
+}
+
+/* Applied via the `endsSection` prop on the final band. Its bottom padding is
+   all the room its logos get, where every other band gets 40px plus the next
+   band's 80px of top padding — 120px — which is why only this one reads as
+   cramped. Matching that figure keeps the bands looking evenly spaced despite
+   the different value. */
+.bandEnd {
+  padding-bottom: var(--space-32);
+}
+
+.bandCopy {
+  max-width: 52ch;
+  margin-top: var(--space-8);
+}
+
+.logoGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  column-gap: 5rem; /* 80px */
+  row-gap: var(--space-12); /* 48px */
+  margin-top: var(--space-16);
+}
+
+.logoCell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 98px;
+}
+
+.logoImg {
+  max-height: 98px;
+  max-width: 100%;
+  width: auto;
+  object-fit: contain;
+}
+
+/* Fallback wordmark shown until a logo asset is supplied. */
+.logoName {
+  font-family: var(--font-body);
+  font-size: var(--text-body-l);
+  font-weight: var(--weight-medium);
+  line-height: var(--leading-none);
+  color: var(--color-paper);
+  text-align: center;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 900px) {
+  /* Intro copy spans the full width once the two-column split gets tight. */
+  .intro {
+    grid-template-columns: 1fr;
+  }
+  .introCol {
+    grid-column: 1;
+  }
+  .logoGrid {
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: var(--space-8);
+  }
+}
+
+@media (max-width: 600px) {
+  .logoGrid {
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: var(--space-8);
+  }
+  .logoCell {
+    min-height: 72px;
+  }
+  .band {
+    padding-top: var(--space-12);
+  }
+}

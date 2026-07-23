@@ -1,0 +1,105 @@
+.grid {
+  /* One column width — grid content is capped at --page-max and inset by the
+     page gutter on both sides, then split into 12 equal tracks. */
+  --work-col: calc(
+    (min(100vw, var(--page-max)) - 2 * var(--page-gutter)) / 12
+  );
+
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  /* Column gap is 0: the leftover 6th column between a 5 + 6 pair is the gutter,
+     so it stretches proportionally with the browser. Row gap matches that one
+     column width, keeping vertical spacing equal to the horizontal gutter. */
+  column-gap: 0;
+  row-gap: var(--work-col);
+  align-items: start;
+}
+
+.item {
+  grid-column: var(--col, 1 / -1);
+  min-width: 0;
+}
+
+.card {
+  display: block;
+  color: inherit;
+}
+
+.media {
+  overflow: hidden;
+  background: color-mix(in srgb, var(--color-fg) 5%, transparent);
+}
+
+.media img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform var(--duration-base) var(--ease-standard);
+}
+
+.card:not(.disabled):hover .media img {
+  transform: scale(1.02);
+}
+
+.placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: var(--border-width) solid var(--color-line);
+  color: var(--color-fg-subtle);
+  font-family: var(--font-display);
+  font-weight: var(--weight-display);
+  font-size: var(--text-2xl);
+  text-align: center;
+  padding: var(--space-4);
+}
+
+.label {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-2);
+  margin-top: var(--space-3);
+}
+
+/* Header 4 */
+.title {
+  font-family: var(--font-display);
+  font-weight: var(--weight-display);
+  font-size: var(--text-h4);
+  line-height: var(--leading-none);
+  letter-spacing: var(--tracking-normal);
+  color: var(--color-ink);
+}
+
+/* Paragraph M */
+.category {
+  font-family: var(--font-body);
+  font-weight: var(--weight-regular);
+  font-size: var(--text-body-m);
+  line-height: var(--leading-none);
+  letter-spacing: var(--tracking-normal);
+  color: var(--color-ink);
+}
+
+.soon {
+  color: var(--color-fg-subtle);
+}
+
+.disabled {
+  cursor: default;
+}
+
+/* Mobile: 4-column grid, but every project spans all 4 (one per row, stacked) */
+@media (max-width: 600px) {
+  .grid {
+    --work-col: calc(
+      (min(100vw, var(--page-max)) - 2 * var(--page-gutter)) / 4
+    );
+    grid-template-columns: repeat(4, 1fr);
+    row-gap: var(--space-8);
+  }
+  .item {
+    grid-column: 1 / -1;
+  }
+}

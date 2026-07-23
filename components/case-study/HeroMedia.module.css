@@ -1,0 +1,43 @@
+/*
+  Opening image. It starts inset to the page gutters — overlapping up into the
+  masthead's colour fill — then opens out to the full browser width as you scroll.
+
+  --p is the scroll progress (0 → 1), written by HeroMedia.tsx.
+
+  The wrapper is always 100vw and its height never changes; only the clip and a
+  small scale animate. That keeps the effect completely free of layout shift, so
+  content below never jumps while the user is mid-scroll.
+*/
+.wrap {
+  position: relative;
+  z-index: 1;
+  width: 100vw;
+  margin-inline: calc(50% - 50vw);
+  /* Overlap up into the colour fill above. The masthead reserves the same
+     amount as bottom padding, so this can never cover the title. */
+  margin-top: calc(var(--hero-overlap) * -1);
+  overflow: hidden;
+  clip-path: inset(0 calc((1 - var(--p, 0)) * var(--page-gutter)));
+  will-change: clip-path;
+}
+
+.img {
+  display: block;
+  width: 100%;
+  height: auto;
+  /* Eases out of a slight zoom as it widens, so it reads as growing. */
+  transform: scale(calc(1 + (1 - var(--p, 0)) * 0.06));
+  transform-origin: center;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wrap {
+    clip-path: none;
+  }
+  .img {
+    transform: none;
+  }
+}
+
+/* The overlap itself is responsive via --hero-overlap (see tokens.css). */

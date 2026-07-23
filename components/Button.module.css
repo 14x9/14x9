@@ -1,0 +1,58 @@
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  font-family: var(--font-body);
+  font-weight: var(--weight-medium);
+  line-height: 1;
+  border-radius: var(--radius-pill);
+  border: var(--border-width) solid transparent;
+  cursor: pointer;
+  transition: background var(--duration-fast) var(--ease-standard),
+    color var(--duration-fast) var(--ease-standard),
+    border-color var(--duration-fast) var(--ease-standard),
+    opacity var(--duration-fast) var(--ease-standard);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+/* Sizes */
+.sm {
+  font-size: var(--text-sm);
+  padding: var(--space-2) var(--space-4);
+}
+.md {
+  font-size: var(--text-base);
+  padding: var(--space-3) var(--space-6);
+}
+.lg {
+  font-size: var(--text-lg);
+  padding: var(--space-4) var(--space-8);
+}
+
+/* Variants */
+.solid {
+  background: var(--color-bg-inverse);
+  color: var(--color-fg-inverse);
+}
+.solid:hover {
+  opacity: 0.85;
+}
+
+.outline {
+  background: transparent;
+  color: var(--color-fg);
+  border-color: var(--color-line);
+}
+.outline:hover {
+  border-color: var(--color-fg);
+}
+
+.ghost {
+  background: transparent;
+  color: var(--color-fg);
+}
+.ghost:hover {
+  opacity: 0.55;
+}

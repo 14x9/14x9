@@ -1,0 +1,80 @@
+.hero {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100svh; /* avoids mobile browser-chrome jump where supported */
+  /* Pull up under the transparent, sticky nav so the field fills the viewport. */
+  margin-top: calc(-1 * var(--nav-height));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-inline: var(--page-gutter);
+  overflow: hidden;
+  isolation: isolate;
+
+  /* Warm field. The glow that used to sit on top of this as a second background
+     layer is now its own element (.glow) so it can be moved — see HeroGlow.tsx. */
+  background: linear-gradient(
+    180deg,
+    var(--hero-top) 0%,
+    var(--hero-bottom) 100%
+  );
+  color: var(--color-black);
+}
+
+/* The soft glow. Sized a little over a viewport wide so its falloff reaches
+   roughly half the field, matching the original static gradient, and capped so
+   the promoted layer stays a sane size on very large screens. */
+.glow {
+  --glow-size: clamp(560px, 105vw, 1500px);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  width: var(--glow-size);
+  height: var(--glow-size);
+  pointer-events: none;
+  will-change: transform;
+
+  /* Many stops, easing the alpha down like a gaussian. The original two-stop
+     gradient was fine parked in a corner, but once it moves across the field a
+     linear ramp shows its edge as a visible ring. Each stop mixes toward
+     `transparent` in the glow's own hue so the fade never dips through grey.
+
+     Peaking well under full opacity and spreading the energy further out is
+     what keeps it subtle: it reads as light sitting in the field rather than a
+     shape drawn on top of it. */
+  background: radial-gradient(
+    closest-side circle,
+    color-mix(in srgb, var(--hero-glow) 58%, transparent) 0%,
+    color-mix(in srgb, var(--hero-glow) 50%, transparent) 20%,
+    color-mix(in srgb, var(--hero-glow) 39%, transparent) 36%,
+    color-mix(in srgb, var(--hero-glow) 27%, transparent) 50%,
+    color-mix(in srgb, var(--hero-glow) 17%, transparent) 62%,
+    color-mix(in srgb, var(--hero-glow) 10%, transparent) 73%,
+    color-mix(in srgb, var(--hero-glow) 5%, transparent) 83%,
+    color-mix(in srgb, var(--hero-glow) 2%, transparent) 92%,
+    color-mix(in srgb, var(--hero-glow) 0%, transparent) 100%
+  );
+
+  /* Pre-hydration and no-JS resting spot: the design's top-right position.
+     HeroGlow takes over in px on mount and eases away from exactly here, so
+     there's no jump when it does. */
+  transform: translate3d(
+    calc(74vw - var(--glow-size) / 2),
+    calc(-12vh - var(--glow-size) / 2),
+    0
+  );
+}
+
+.intro {
+  position: relative;
+  z-index: 1;
+  max-width: 660px;
+  text-align: center;
+  font-family: var(--font-body);
+  font-weight: var(--weight-regular);
+  font-size: clamp(1.125rem, 1rem + 1vw, 1.5rem);
+  line-height: 1.35;
+  color: var(--color-black);
+}

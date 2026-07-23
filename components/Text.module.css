@@ -1,0 +1,110 @@
+/* Type ramp — matches the "System — Desktop" Figma sheet.
+   Every style: line-height 1.0, letter-spacing 0. Serif (display) is H1/H2/H4;
+   the rest are body sans. See /systems for the living specimen. */
+
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6,
+.body_xl,
+.body_l,
+.body_m,
+.body_s,
+.body_xs,
+.nav_link,
+.text_link {
+  line-height: var(--leading-none);
+  letter-spacing: var(--tracking-normal);
+  color: var(--color-fg);
+}
+
+/* Headers — H1/H2/H4 serif thin, H3 sans regular, H5/H6 sans medium */
+.h1 {
+  font-family: var(--font-display);
+  font-weight: var(--weight-display);
+  font-size: var(--text-h1);
+}
+.h2 {
+  font-family: var(--font-display);
+  font-weight: var(--weight-display);
+  font-size: var(--text-h2);
+}
+.h3 {
+  font-family: var(--font-body);
+  font-weight: var(--weight-regular);
+  font-size: var(--text-h3);
+}
+.h4 {
+  font-family: var(--font-display);
+  font-weight: var(--weight-display);
+  font-size: var(--text-h4);
+}
+.h5 {
+  font-family: var(--font-body);
+  font-weight: var(--weight-medium);
+  font-size: var(--text-h5);
+}
+.h6 {
+  font-family: var(--font-body);
+  font-weight: var(--weight-medium);
+  font-size: var(--text-h6);
+}
+
+/* Body — sans regular */
+.body_xl {
+  font-family: var(--font-body);
+  font-weight: var(--weight-regular);
+  font-size: var(--text-body-xl);
+}
+.body_l {
+  font-family: var(--font-body);
+  font-weight: var(--weight-regular);
+  font-size: var(--text-body-l);
+}
+.body_m {
+  font-family: var(--font-body);
+  font-weight: var(--weight-regular);
+  font-size: var(--text-body-m);
+}
+.body_s {
+  font-family: var(--font-body);
+  font-weight: var(--weight-regular);
+  font-size: var(--text-body-s);
+}
+.body_xs {
+  font-family: var(--font-body);
+  font-weight: var(--weight-regular);
+  font-size: var(--text-body-xs);
+}
+
+/* Links — sans medium */
+.nav_link {
+  font-family: var(--font-body);
+  font-weight: var(--weight-medium);
+  font-size: var(--text-nav-link);
+}
+.text_link {
+  font-family: var(--font-body);
+  font-weight: var(--weight-medium);
+  font-size: var(--text-text-link);
+}
+
+/* --- Utility styles (not part of the Figma type ramp) --- */
+.small {
+  font-family: var(--font-body);
+  font-weight: var(--weight-regular);
+  font-size: var(--text-sm);
+  line-height: var(--leading-normal);
+  color: var(--color-fg-muted);
+}
+
+.eyebrow {
+  font-family: var(--font-body);
+  font-weight: var(--weight-medium);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--color-fg-muted);
+}

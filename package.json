@@ -1,0 +1,29 @@
+{
+  "name": "14x9",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "optimize:images": "node scripts/optimize-images.mjs"
+  },
+  "dependencies": {
+    "@keystatic/core": "^0.6.0",
+    "@keystatic/next": "^5.0.4",
+    "gray-matter": "^4.0.3",
+    "image-size": "^2.0.2",
+    "next": "^15.5.4",
+    "next-mdx-remote": "^5.0.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.0",
+    "sharp": "^0.35.3",
+    "typescript": "^5.7.0"
+  }
+}

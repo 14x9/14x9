@@ -1,0 +1,39 @@
+/*
+  Custom fonts. Drop the licensed Pangram Pangram files into /public/fonts/
+  with the filenames below and they'll load automatically. Until then the
+  fallback stacks in tokens.css (Helvetica/Times) render in their place.
+
+  Expected files (woff2 preferred):
+    PPM (body):    PPM-Light.woff2 (300), PPM-Regular.woff2 (400),
+                   PPM-Medium.woff2 (500)
+    PPE (display): PPEditorialNew-Ultralight.woff2 (100)
+*/
+
+@font-face {
+  font-family: "PPM";
+  src: url("/fonts/PPM-Light.woff2") format("woff2");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "PPM";
+  src: url("/fonts/PPM-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "PPM";
+  src: url("/fonts/PPM-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "PPE";
+  src: url("/fonts/PPEditorialNew-Ultralight.woff2") format("woff2");
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}

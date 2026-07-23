@@ -1,0 +1,57 @@
+---
+# MANUAL AUTHORING REFERENCE — the easy way is the visual editor at /keystatic.
+# To hand-author: copy this file to content/work/<slug>.mdx. The slug (filename)
+# becomes the URL: content/work/hark.mdx -> /work/hark
+title: Project Title
+category: Web Design — Category        # project type, shows under the title
+role: Art Direction, UX & UI Design    # sub-title (optional)
+summary: One or two sentences describing the project.   # description (optional)
+liveUrl: https://example.com           # optional — renders a "See it live" button
+hero: /uploads/<slug>/hero.webp           # optional — put assets in public/uploads/<slug>/
+heroColor: "#443530"                   # fill behind the title; text auto light/dark
+order: 99                              # lower sorts earlier in the work list
+comingSoon: false                      # true = listed but not clickable
+
+# Homepage work-grid thumbnail. The desktop grid is 12 columns: portrait thumbs
+# occupy 5 columns, landscape 6, and a 5 + 6 pair leaves one blank gutter column
+# between them. Studies pair up two-per-row in order; span: 3 makes a landscape
+# run full-width across all 12 columns.
+thumb: /work/thumbnails/Thumbnail-<Name>-L.jpg
+orientation: landscape                 # landscape (wide) or portrait (tall)
+span: 2                                # 1, 2, or 3 (3 = full width)
+---
+
+{/* Body = prose + media blocks. Available components (no import needed).
+    Images need no width/height — they're measured from the file automatically. */}
+
+<Section title="Section heading">
+  Describe this part of the work. Sections are the text blocks between media.
+</Section>
+
+<Figure src="/uploads/<slug>/image.webp" alt="Describe the image">
+  Optional caption for this image.
+</Figure>
+
+{/* Autoplaying muted loop (great for UI motion / former gifs): */}
+<Video src="/uploads/<slug>/motion.mp4" poster="/uploads/<slug>/motion-poster.webp">
+  Caption for the video.
+</Video>
+
+{/* A Vimeo embed (click-to-load, no third-party script until played): */}
+{/* <Video vimeo="123456789" poster="/uploads/<slug>/poster.webp" aspect="16 / 9" /> */}
+
+{/* Two (or three) items side by side, stacks on mobile: */}
+<MediaGrid columns={2}>
+  <Figure src="/uploads/<slug>/a.webp" alt="A" />
+  <Figure src="/uploads/<slug>/b.webp" alt="B" />
+</MediaGrid>
+
+{/* A swipeable image slider: */}
+<Carousel>
+  <CarouselItem src="/uploads/<slug>/slide-1.webp" alt="Slide one" />
+  <CarouselItem src="/uploads/<slug>/slide-2.webp" alt="Slide two" />
+</Carousel>
+
+{/* Edge-to-edge media: add the `bleed` prop to any <Figure> or <Video>. */}
+
+<Quote cite="Attribution">A pull quote from the project.</Quote>

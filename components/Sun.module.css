@@ -1,0 +1,29 @@
+/* Full-viewport, fixed layer that sits behind the page content. `overflow:
+   hidden` is what crops the disc against the left edge of the screen. */
+.wrap {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+  /* Pre-hydration / no-JS fallback: the same disc as a plain gradient, so the
+     hero never flashes without it. Removed once the canvas takes over. */
+  background: radial-gradient(
+    circle 32vw at 25% 51%,
+    var(--color-sun) 0%,
+    var(--color-sun) 82%,
+    color-mix(in srgb, var(--color-sun) 45%, transparent) 93%,
+    transparent 100%
+  );
+}
+
+.wrap[data-ready="true"] {
+  background: none;
+}
+
+.canvas {
+  position: absolute;
+  /* left/top/width/height are set from JS — the canvas only covers the disc's
+     bounding box (plus scatter room), not the whole viewport. `filter` is set
+     from JS too, off by default; see the `blur` setting in sunSettings.ts. */
+}

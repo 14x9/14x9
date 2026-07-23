@@ -1,0 +1,129 @@
+/*
+  Design tokens — the single source of truth for the whole site.
+  Everything (Button, Text, Nav, pages) reads from these variables.
+  Adjust a value here and it propagates everywhere, including /systems.
+*/
+
+:root {
+  /* ---- Palette (the brand colors — the only raw hex values on the site) ---- */
+  --color-white: #ffffff;
+  --color-paper: #eeeef3;
+  --color-concrete: #8e8f93;
+  --color-ink: #222222;
+  --color-black: #000000;
+  --color-magma: #ff4400;
+
+  /* Hero gradient (the "Experiment Hero" — a warm red-orange field with a glow) */
+  --hero-top: #ff4545;
+  --hero-bottom: #ff523a;
+  --hero-glow: #ffb03a;
+
+  /* The soft orange "sun" disc behind the About hero */
+  --color-sun: #ff8902;
+
+  /* ---- Color roles (what components actually use; each maps to the palette) --- */
+  --color-bg: var(--color-white);
+  --color-fg: var(--color-ink);
+  --color-fg-muted: var(--color-concrete);
+  --color-fg-subtle: var(--color-concrete);
+  --color-line: var(--color-paper);
+  --color-accent: var(--color-magma);
+
+  /* Inverse (for dark sections / buttons) */
+  --color-bg-inverse: var(--color-black);
+  --color-fg-inverse: var(--color-white);
+
+  /* ---- Typography ---- */
+  /* PPM = body grotesque (weights 300/400/500). PPE = display serif (weight 100). */
+  --font-body: "PPM", "Helvetica Neue", Arial, sans-serif;
+  --font-display: "PPE", "Times New Roman", Times, serif;
+
+  --weight-light: 300;
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-display: 100;
+
+  /* ---- Figma type ramp (the canonical text styles — see /systems) ----
+     Matches the "System — Desktop" Figma sheet: H1/H2/H4 are display serif
+     (thin/100), everything else is body sans (H3 400, H5/H6 500, body 400,
+     links 500). All styles use line-height 1.0 and letter-spacing 0.
+     Large headers (H1–H4) reach their Figma desktop px (144/80/64/48) around
+     ~1100px and scale down on narrower screens; H5 down are fixed. */
+  --text-h1: clamp(3rem, 13vw, 9rem);       /* → 144 */
+  --text-h2: clamp(2.5rem, 7.3vw, 5rem);    /* → 80 */
+  --text-h3: clamp(2.25rem, 5.8vw, 4rem);   /* → 64 */
+  --text-h4: clamp(1.75rem, 4.4vw, 3rem);   /* → 48 */
+  --text-h5: 2rem;         /* 32 */
+  --text-h6: 1.5rem;       /* 24 */
+  --text-body-xl: 2rem;    /* 32 */
+  --text-body-l: 1.5rem;   /* 24 */
+  --text-body-m: 1.25rem;  /* 20 */
+  --text-body-s: 1.125rem; /* 18 */
+  --text-body-xs: 1rem;    /* 16 */
+  --text-nav-link: 1.125rem; /* 18 */
+  --text-text-link: 1rem;    /* 16 */
+
+  /* Legacy display ramp — retained for Marquee and case-study prose */
+  --text-display-xl: clamp(2.75rem, 10vw, 6rem);   /* hero headlines */
+  --text-display-lg: clamp(2rem, 7vw, 4rem);
+  --text-display-md: clamp(1.75rem, 5vw, 3rem);
+
+  /* UI size scale — used by chrome (buttons, nav, footer) and utility styles */
+  --text-xs: 0.75rem;    /* 12 */
+  --text-sm: 0.875rem;   /* 14 */
+  --text-base: 1rem;     /* 16 */
+  --text-lg: 1.25rem;    /* 20 */
+  --text-xl: 1.5rem;     /* 24 */
+  --text-2xl: 2rem;      /* 32 */
+
+  --leading-none: 1;     /* Figma type styles (line-height 100%) */
+  --leading-tight: 1.05;
+  --leading-snug: 1.25;
+  --leading-normal: 1.5;
+  --tracking-tight: -0.02em;
+  --tracking-normal: 0em;
+  --tracking-wide: 0.08em;
+
+  /* ---- Spacing scale ---- */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-24: 6rem;
+  --space-32: 8rem;
+
+  /* ---- Layout ---- */
+  --page-max: 2000px;
+  /* Side margins: 24px on mobile, 64px from tablet up (see breakpoint below).
+     Used by .container, so the nav and page content stay aligned. */
+  --page-gutter: 24px;
+  --nav-height: 96px;
+  --logo-height: 32px; /* wordmark is 83×32; width scales from this */
+  /* How far a case-study hero image rides up into the masthead's colour fill.
+     The masthead reserves exactly this much space at its bottom, so the title
+     is never covered. Change it here and both sides stay in step. */
+  --hero-overlap: var(--space-16);
+
+  /* ---- Radius / border ---- */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-pill: 999px;
+  --border-width: 1px;
+
+  /* ---- Motion ---- */
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --duration-fast: 150ms;
+  --duration-base: 250ms;
+}
+
+/* Tablet and up: wider side margins, and a deeper hero overlap */
+@media (min-width: 768px) {
+  :root {
+    --page-gutter: 64px;
+    --hero-overlap: var(--space-32);
+  }
+}

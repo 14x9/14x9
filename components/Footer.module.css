@@ -1,0 +1,74 @@
+/* Full-bleed magma block that closes every page. Deliberately tall — the top
+   padding is most of what makes it read as a spacious final beat rather than a
+   strip of small print. The fluid values below are tuned so the proportions
+   hold from phone width up to --page-max (2000px). */
+.footer {
+  background: var(--color-magma);
+  color: var(--color-ink);
+  /* Coloured surface: re-map the foreground role, not just `color`. <Text> and
+     the other primitives set `color: var(--color-fg)` on themselves, which beats
+     an inherited value — so anything dropped in here later would otherwise come
+     out in the page's default ink-on-white role and look wrong. */
+  --color-fg: var(--color-ink);
+  --color-fg-muted: var(--color-ink);
+  padding-top: clamp(11rem, 10.5rem + 12vw, 26rem);
+  padding-bottom: clamp(3.5rem, 2.9rem + 3.5vw, 7.5rem);
+}
+
+/* Centred contact row. Sits on its own well above the studio line. */
+.links {
+  display: flex;
+  justify-content: center;
+  gap: clamp(3rem, 6.7vw, 8rem);
+  font-size: var(--text-body-l);
+  line-height: var(--leading-none);
+}
+
+/* Same interaction as the nav's text links: a 2px rule that wipes in from the
+   left on hover and retracts to the right on hover-out. Mechanism and timing
+   are lifted from Nav.module.css so the two read as one behaviour — see the
+   `.link::after` rule there. */
+.links a {
+  position: relative;
+  display: inline-block;
+  color: var(--color-ink);
+  font-weight: var(--weight-medium);
+}
+
+.links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -4px;
+  height: 2px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform var(--duration-base) var(--ease-standard);
+}
+
+.links a:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* The studio line. FluidHeadline sets the font-size so the string spans the
+   container exactly; everything here is what it can't compute for itself.
+   `text-transform` sits on the wrapper so it reaches both the offscreen
+   measurer and the visible text — putting it on only one would make the
+   measured width disagree with what renders, and the fit would be wrong. */
+.studioLine {
+  margin-top: clamp(10rem, 9.7rem + 3.75vw, 15rem);
+  text-transform: uppercase;
+  color: var(--color-ink);
+}
+
+@media (max-width: 768px) {
+  .links {
+    flex-direction: column;
+    align-items: center;
+    gap: clamp(2.5rem, 11vw, 4.5rem);
+    font-size: var(--text-body-m);
+  }
+}
