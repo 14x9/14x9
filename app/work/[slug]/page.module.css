@@ -11,9 +11,11 @@
   min-height: calc(720px + var(--hero-overlap));
   display: flex;
   align-items: center;
-  /* Pulled up under the transparent nav so the fill runs to the very top. */
-  margin-top: calc(var(--nav-height) * -1);
-  padding-top: var(--nav-height);
+  /* Pulled up under the transparent nav so the fill runs to the very top —
+     including the top safe-area inset, so the colour fill reaches the physical
+     top edge under the status bar and the title still clears the nav. */
+  margin-top: calc((var(--nav-height) + var(--nav-safe-top)) * -1);
+  padding-top: calc(var(--nav-height) + var(--nav-safe-top));
   padding-bottom: var(--hero-overlap);
 }
 

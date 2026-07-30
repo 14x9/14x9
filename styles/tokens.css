@@ -102,6 +102,11 @@
      Used by .container, so the nav and page content stay aligned. */
   --page-gutter: 24px;
   --nav-height: 96px;
+  /* Top safe-area inset (notch / status bar). Zero on desktop and anywhere the
+     page isn't drawn edge-to-edge; a real value once viewport-fit=cover is set
+     (see app/layout.tsx). Folded into the nav's blur band and the hero pull-ups
+     so the frost reaches the very top edge and the fills still run to it. */
+  --nav-safe-top: env(safe-area-inset-top, 0px);
   --logo-height: 32px; /* wordmark is 83×32; width scales from this */
   /* How far a case-study hero image rides up into the masthead's colour fill.
      The masthead reserves exactly this much space at its bottom, so the title

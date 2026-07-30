@@ -62,7 +62,14 @@ ul, ol {
   width: 100%;
   max-width: var(--page-max);
   margin-inline: auto;
-  padding-inline: var(--page-gutter);
+  /* Keep the normal gutter, but never let content slip under a side notch once
+     the page draws edge-to-edge (viewport-fit=cover) — e.g. landscape on a
+     notched phone. Both insets are 0 in portrait and on desktop. */
+  padding-inline: max(
+    var(--page-gutter),
+    env(safe-area-inset-left, 0px),
+    env(safe-area-inset-right, 0px)
+  );
 }
 
 @media (prefers-reduced-motion: reduce) {
