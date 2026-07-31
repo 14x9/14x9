@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { getWork, getWorkSlugs } from "@/lib/work";
@@ -47,6 +47,19 @@ export async function generateMetadata({
     title: doc.title,
     description: doc.summary,
   };
+}
+
+// Match iOS Safari's status-bar strip to the masthead's colour fill so it
+// blends into the study's own colour instead of showing a strip above it. Same
+// fallback as the masthead background (--color-ink) when no heroColor is set.
+export async function generateViewport({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Viewport> {
+  const { slug } = await params;
+  const doc = getWork(slug);
+  return { themeColor: doc?.heroColor ?? "#222222" };
 }
 
 export default async function CaseStudyPage({

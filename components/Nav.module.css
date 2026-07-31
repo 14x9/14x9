@@ -2,11 +2,6 @@
   position: sticky;
   top: 0;
   z-index: 50;
-  /* Extend the bar up into the top safe area (notch / status bar). The .blur
-     stack below is inset:0 of the padding box, so this padding lengthens the
-     frosted band to the physical top edge; .inner keeps its --nav-height and
-     sits below the inset, so the links and logo clear the notch. */
-  padding-top: var(--nav-safe-top);
   /* Transparent overlay — sits over the homepage hero and page content alike.
      The frosted blur comes from the .blur layer stack below. Text color is
      driven by --nav-fg, flipped to white over dark backdrops (see [data-theme]). */

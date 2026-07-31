@@ -2,14 +2,14 @@ import type { Metadata, Viewport } from "next";
 import "@/styles/globals.css";
 import Chrome from "@/components/Chrome";
 
-// Draw edge-to-edge into the display's safe areas (notch / status bar / home
-// indicator). This is what makes env(safe-area-inset-*) report real values, so
-// the sticky nav's frosted blur can extend up under the status bar to the very
-// top edge instead of leaving a sharp strip of scrolling content above it.
+// theme-color paints iOS Safari's status-bar / top-chrome strip a solid colour
+// instead of letting page content scroll through it. Kept white to match the
+// page background below the hero. (Deliberately NOT viewport-fit=cover: that
+// draws content *under* the status bar, which is what showed content through.)
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  viewportFit: "cover",
+  themeColor: "#ffffff",
 };
 
 export const metadata: Metadata = {
@@ -30,9 +30,8 @@ export const metadata: Metadata = {
     apple: { url: "/assets/14x9-app-icon.png", sizes: "180x180", type: "image/png" },
   },
   openGraph: {
-    title: "14x9 — Web Design Studio",
-    description:
-      "The studio of designer Naïm Sheriff. Based in Brooklyn, NY — helping brands create beautiful experiences for apps and web.",
+    title: "14x9 Inc. Design",
+    description: "The studio of designer Naïm Sheriff. Based in Brooklyn, NY",
     url: "https://14x9.com",
     siteName: "14x9",
     type: "website",
@@ -42,9 +41,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "14x9 — Web Design Studio",
-    description:
-      "The studio of designer Naïm Sheriff. Based in Brooklyn, NY — helping brands create beautiful experiences for apps and web.",
+    title: "14x9 Inc. Design",
+    description: "The studio of designer Naïm Sheriff. Based in Brooklyn, NY",
     images: ["/assets/14x9%20share.jpg"],
   },
 };

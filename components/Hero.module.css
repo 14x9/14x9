@@ -3,10 +3,8 @@
   width: 100%;
   min-height: 100vh;
   min-height: 100svh; /* avoids mobile browser-chrome jump where supported */
-  /* Pull up under the transparent, sticky nav so the field fills the viewport.
-     Includes the top safe-area inset so the gradient runs to the very top edge
-     under the status bar, matching the nav's extended blur band. */
-  margin-top: calc(-1 * (var(--nav-height) + var(--nav-safe-top)));
+  /* Pull up under the transparent, sticky nav so the field fills the viewport. */
+  margin-top: calc(-1 * var(--nav-height));
   display: flex;
   align-items: center;
   justify-content: center;
