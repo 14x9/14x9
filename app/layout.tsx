@@ -2,14 +2,13 @@ import type { Metadata, Viewport } from "next";
 import "@/styles/globals.css";
 import Chrome from "@/components/Chrome";
 
-// viewport-fit=cover lets the page draw into the display's safe areas so it
-// fills the full screen height on iOS Safari — without it, Safari leaves a white
-// strip in the bottom safe area (behind its toolbar). It's all-or-nothing, so
-// content also reaches under the top status bar. theme-color stays white.
+// theme-color paints iOS Safari's status-bar / top-chrome strip a solid colour
+// instead of letting page content scroll through it. Kept white to match the
+// page background below the hero. (Deliberately NOT viewport-fit=cover: that
+// draws content *under* the status bar, which is what showed content through.)
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  viewportFit: "cover",
   themeColor: "#ffffff",
 };
 

@@ -18,6 +18,17 @@
   }
 }
 
+/* ...but not on mobile Safari: iOS 26 samples this bottom-most fixed element to
+   tint the area behind its toolbar, turning it into a white bar. Hide it there
+   (same Safari-only query as the nav); Chrome and desktop keep the effect. */
+@supports (-webkit-hyphens: none) {
+  @media (hover: none) and (pointer: coarse) {
+    .blur {
+      display: none;
+    }
+  }
+}
+
 .blur > div {
   position: absolute;
   inset: 0;
