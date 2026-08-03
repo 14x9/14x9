@@ -1,0 +1,64 @@
+/* Fixed frosted band pinned to the bottom edge. Hidden by default; shown only on
+   mobile (below the site's 768px breakpoint). pointer-events:none so it never
+   blocks taps on the content or footer links beneath it. */
+.blur {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: var(--nav-height); /* mirror the nav's 96px band */
+  z-index: 40; /* above page content, below the nav (50) */
+  pointer-events: none;
+  display: none;
+}
+
+@media (max-width: 767.98px) {
+  .blur {
+    display: block;
+  }
+}
+
+.blur > div {
+  position: absolute;
+  inset: 0;
+}
+
+/* Same radii as the nav stack, but the masks run to top: each layer is solid at
+   the bottom edge and fades out higher up, so the blur is strongest at the very
+   bottom and the layers drop away one by one toward the top. */
+.blur > div:nth-child(1) {
+  backdrop-filter: blur(1px);
+  -webkit-backdrop-filter: blur(1px);
+  -webkit-mask-image: linear-gradient(to top, #000 0%, #000 50%, transparent 90%);
+  mask-image: linear-gradient(to top, #000 0%, #000 50%, transparent 90%);
+}
+.blur > div:nth-child(2) {
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  -webkit-mask-image: linear-gradient(to top, #000 0%, #000 40%, transparent 75%);
+  mask-image: linear-gradient(to top, #000 0%, #000 40%, transparent 75%);
+}
+.blur > div:nth-child(3) {
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  -webkit-mask-image: linear-gradient(to top, #000 0%, #000 30%, transparent 60%);
+  mask-image: linear-gradient(to top, #000 0%, #000 30%, transparent 60%);
+}
+.blur > div:nth-child(4) {
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  -webkit-mask-image: linear-gradient(to top, #000 0%, #000 20%, transparent 45%);
+  mask-image: linear-gradient(to top, #000 0%, #000 20%, transparent 45%);
+}
+.blur > div:nth-child(5) {
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  -webkit-mask-image: linear-gradient(to top, #000 0%, #000 10%, transparent 30%);
+  mask-image: linear-gradient(to top, #000 0%, #000 10%, transparent 30%);
+}
+.blur > div:nth-child(6) {
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  -webkit-mask-image: linear-gradient(to top, #000 0%, transparent 18%);
+  mask-image: linear-gradient(to top, #000 0%, transparent 18%);
+}

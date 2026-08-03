@@ -3,6 +3,7 @@
 import { usePathname } from "next/navigation";
 import Nav from "./Nav";
 import Footer from "./Footer";
+import BottomBlur from "./BottomBlur";
 
 /**
  * Site chrome (nav + footer) around page content — hidden on the Keystatic
@@ -16,6 +17,7 @@ export default function Chrome({ children }: { children: React.ReactNode }) {
       <Nav />
       <main>{children}</main>
       <Footer />
+      <BottomBlur />
     </>
   );
 }
