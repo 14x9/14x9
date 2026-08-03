@@ -82,6 +82,19 @@
   mask-image: linear-gradient(to bottom, #000 0%, transparent 18%);
 }
 
+/* Drop the frosted blur on mobile Safari only, leaving a plain transparent nav
+   there. @supports(-webkit-hyphens:none) matches Safari (Blink/Chrome don't
+   support -webkit-hyphens), and the coarse-pointer query narrows it to touch —
+   so Chrome keeps the blur everywhere and desktop Safari keeps it too; only
+   mobile Safari loses it. The links stay readable via the JS ink/white flip. */
+@supports (-webkit-hyphens: none) {
+  @media (hover: none) and (pointer: coarse) {
+    .blur {
+      display: none;
+    }
+  }
+}
+
 /* Nav items sit left, logo right; 96px tall with the page's side margins.
    Sits above the blur stack so the links and logo stay sharp. */
 .inner {
