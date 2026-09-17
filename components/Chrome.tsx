@@ -12,6 +12,16 @@ import BottomBlur from "./BottomBlur";
 export default function Chrome({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   if (pathname?.startsWith("/keystatic")) return <>{children}</>;
+  // AI experiments are full-bleed canvases: nav only, no footer or bottom blur
+  // so nothing but the wordmark sits over the artwork.
+  if (pathname?.startsWith("/ai")) {
+    return (
+      <>
+        <Nav />
+        <main>{children}</main>
+      </>
+    );
+  }
   return (
     <>
       <Nav />

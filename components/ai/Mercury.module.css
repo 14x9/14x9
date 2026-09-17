@@ -1,0 +1,14 @@
+/* Full-viewport black stage for the mercury. Fixed so the page never scrolls
+   and the blob's box maps exactly to the browser edges. The solid black
+   background also drives the nav's ink/white sampler to white. */
+.canvas {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  display: block;
+  background: #000;
+  touch-action: none; /* let taps/tilt drive the sim, not the page */
+  z-index: 0;
+}
